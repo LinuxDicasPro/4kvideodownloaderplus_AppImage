@@ -4,8 +4,6 @@
 #
 ####################################
 
-set -e
-
 destdir=~/__APPIMAGE__
 test -e "../_APPIMAGE" && destdir="../_APPIMAGE" # Opcional
 
@@ -13,8 +11,22 @@ prg="4kvideodownloaderplus"
 arch="x86_64"
 link="https://www.4kdownload.com/downloads"
 
+
+for i in {1..35}; { printf '─'; }; printf "\n"
+printf "Search latest version: "
+
 version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "4K Video Downloader+" <(links -dump "$link")))"
 
+printf "\033[1;32m$version\033[m\n"
+for i in {1..35}; { printf '─'; }; printf "\n"
+
+
+test -z "$version" && {
+    echo "update script. version not found!"
+    exit 1
+}
+
+set -e
 
 test ! -e $destdir && mkdir -p $destdir
 cd $destdir
@@ -27,7 +39,6 @@ test -e "$prg-$version-$arch.AppImage" && {
 
 
 test ! -e "appimagetool-x86_64.AppImage" && {
-    echo "download appimagetool..."
     link_tool="https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage"
     wget -c -q --show-progress "$link_tool"
     chmod +x "appimagetool-x86_64.AppImage"
@@ -36,7 +47,6 @@ test ! -e "appimagetool-x86_64.AppImage" && {
 link_prg="https://dl.4kdownload.com/app/4kvideodownloaderplus_${version}_amd64.tar.bz2"
 link_svg="https://static.4kdownload.com/main/img/redesign/videodownloader.a855bb9dddb2.svg"
 
-echo "download $prg..."
 wget -c -q --show-progress "$link_prg"
 
 cwd=$PWD
@@ -45,9 +55,11 @@ rm -rf "$prg.AppDir"
 mkdir -p "$prg.AppDir"
 cd "$prg.AppDir"
 
-tar -jxvf "$cwd/${link_prg##*/}"
+echo -e "\nextract ${link_prg##*/} ..."
+printf "${link_prg##*/}\t["
+tar -jxf "$cwd/${link_prg##*/}" --checkpoint=500 --checkpoint-action=exec='printf ='
+echo -e "]\n"
 
-echo "download icon..."
 wget -c -q --show-progress -O "$prg.svg" "$link_svg"
 
 echo "[Desktop Entry]
@@ -67,8 +79,12 @@ cd \$APPDIR/$prg
 chmod +x AppRun
 cd ..
 
+printf "\n"; for i in {1..80}; { printf '─'; }; echo -e "\n"
+
 ./appimagetool-x86_64.AppImage "$prg.AppDir"
 mv "4k_Video_Downloader+-x86_64.AppImage" "$prg-$version-$arch.AppImage"
+
+printf "\n"; for i in {1..80}; { printf '─'; }; echo -e "\n"
 
 rm -rf "$prg.AppDir"
 cd ..
