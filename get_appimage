@@ -4,18 +4,30 @@
 #
 ####################################
 
+
 destdir=~/__APPIMAGE__
 test -e "../_APPIMAGE" && destdir="../_APPIMAGE" # Opcional
 
-prg="4kvideodownloaderplus"
+
+###########################################
+
 arch="x86_64"
+prg="4kvideodownloaderplus"
 link="https://www.4kdownload.com/downloads"
+
+###########################################
 
 
 for i in {1..35}; { printf '─'; }; printf "\n"
 printf "Search latest version: "
 
+
+########
+
 version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "4K Video Downloader+" <(links -dump "$link")))"
+
+########
+
 
 printf "\033[1;32m$version\033[m\n"
 for i in {1..35}; { printf '─'; }; printf "\n"
@@ -44,8 +56,14 @@ test ! -e "appimagetool-x86_64.AppImage" && {
     chmod +x "appimagetool-x86_64.AppImage"
 }
 
+
+#########
+
 link_prg="https://dl.4kdownload.com/app/4kvideodownloaderplus_${version}_amd64.tar.bz2"
 link_svg="https://static.4kdownload.com/main/img/redesign/videodownloader.a855bb9dddb2.svg"
+
+#########
+
 
 wget -c -q --show-progress "$link_prg"
 
@@ -62,15 +80,25 @@ echo -e "]\n"
 
 wget -c -q --show-progress -O "$prg.svg" "$link_svg"
 
+
+####################################
+
+appimage_name="4k Video Downloader+"
+comment="Video Downloader"
+categories="Application;Network;"
+
+####################################
+
+
 echo "[Desktop Entry]
-Name=4k Video Downloader+
-GenericName=4k Video Downloader+
-Comment=Video Downloader
+Name=$appimage_name
+GenericName=$appimage_name
+Comment=$comment
 Exec=$prg
 Icon=$prg
 Type=Application
 Terminal=false
-Categories=Application;Network;" > "$prg.desktop"
+Categories=$categories" > "$prg.desktop"
 
 echo "#!/bin/bash
 cd \$APPDIR/$prg
@@ -81,8 +109,8 @@ cd ..
 
 printf "\n"; for i in {1..80}; { printf '─'; }; echo -e "\n"
 
-./appimagetool-x86_64.AppImage "$prg.AppDir"
-mv "4k_Video_Downloader+-x86_64.AppImage" "$prg-$version-$arch.AppImage"
+env ARCH=$arch ./appimagetool-x86_64.AppImage "$prg.AppDir"
+mv "${appimage_name// /_}-$arch.AppImage" "$prg-$version-$arch.AppImage"
 
 printf "\n"; for i in {1..80}; { printf '─'; }; echo -e "\n"
 
