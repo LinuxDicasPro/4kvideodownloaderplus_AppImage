@@ -85,7 +85,7 @@ wget -c -q --show-progress -O "$prg.svg" "$link_svg"
 
 appimage_name="4k Video Downloader+"
 comment="Video Downloader"
-categories="Application;Network;"
+categories="Network;"
 
 ####################################
 
