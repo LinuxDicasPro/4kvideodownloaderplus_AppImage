@@ -24,7 +24,7 @@ printf "Search latest version: "
 
 ########
 
-version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "4K Video Downloader+" <(links -dump "$link")))"
+version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
 
 ########
 
@@ -66,6 +66,7 @@ link_svg="https://static.4kdownload.com/main/img/redesign/videodownloader.a855bb
 
 
 wget -c -q --show-progress "$link_prg"
+file_prg=${link_prg##*/}
 
 cwd=$PWD
 
@@ -73,9 +74,9 @@ rm -rf "$prg.AppDir"
 mkdir -p "$prg.AppDir"
 cd "$prg.AppDir"
 
-echo -e "\nextract ${link_prg##*/} ..."
-printf "${link_prg##*/}\t["
-tar -jxf "$cwd/${link_prg##*/}" --checkpoint=500 --checkpoint-action=exec='printf ='
+echo -e "\nextract $file_prg ..."
+printf "$file_prg\t["
+tar -jxf "$cwd/$file_prg" --checkpoint=500 --checkpoint-action=exec='printf ='
 echo -e "]\n"
 
 wget -c -q --show-progress -O "$prg.svg" "$link_svg"
@@ -107,12 +108,12 @@ cd \$APPDIR/$prg
 chmod +x AppRun
 cd ..
 
-printf "\n"; for i in {1..80}; { printf '─'; }; echo -e "\n"
+printf "\n"; for ((i=0; i<$COLUMNS; i++)); { printf '─'; }; echo -e "\n"
 
 env ARCH=$arch ./appimagetool-x86_64.AppImage "$prg.AppDir"
 mv "${appimage_name// /_}-$arch.AppImage" "$prg-$version-$arch.AppImage"
 
-printf "\n"; for i in {1..80}; { printf '─'; }; echo -e "\n"
+printf "\n"; for ((i=0; i<$COLUMNS; i++)); { printf '─'; }; echo -e "\n"
 
 rm -rf "$prg.AppDir"
 cd ..

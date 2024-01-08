@@ -1,4 +1,4 @@
-# 4K Video Downaloader Plus AppImage
+# 4K Video Downloader Plus AppImage
 
 Para gerar o AppImage do Programa em seu PC sem precisar baixar absolutamente nada, execute esse comando:
 ```
