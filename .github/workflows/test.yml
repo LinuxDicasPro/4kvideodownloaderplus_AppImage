@@ -31,7 +31,7 @@ jobs:
 
       - name: Search version for 4K Video Downloader
         run: |
-          link="https://www.4kdownload.com/downloadsz"
+          link="https://www.4kdownload.com/downloads"
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
           printf "Search latest version: $version\n" >> $GITHUB_STEP_SUMMARY
 
@@ -39,5 +39,7 @@ jobs:
         run: |
           link="https://www.4kdownload.com/downloads"
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
-          link_prg="https://dl.4kdownload.com/app/4kvideodownloaderplus_${version}_amd64.tar.bz2"
-          
+          link_prg="https://dl.4kdownload.com/app/4kvideodownloaderplus_${version}_amd64.tar.bz2a"
+          status="$(curl -i $link_prg)"
+          echo -e "StatusCode for link $link_prg:\n$status" >> $GITHUB_STEP_SUMMARY
+          if grep -q "HTTP/2 404" <<< "$status"; then exit 1; fi
