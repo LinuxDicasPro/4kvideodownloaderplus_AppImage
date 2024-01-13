@@ -25,9 +25,10 @@ jobs:
       - name: Test Link 4kdownload
         run: |
           link="https://www.4kdownload.com/downloads"
+          status="$(curl -i $link)"
+          echo StatusCode for link $link: $status >> $GITHUB_STEP_SUMMARY
 
       - name: Testing link 4K Video Downloader
         run: |
-          printf "Search latest version: " >> $GITHUB_STEP_SUMMARY
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
-          printf "$version\n" >> $GITHUB_STEP_SUMMARY
+          printf "Search latest version: $version\n" >> $GITHUB_STEP_SUMMARY
