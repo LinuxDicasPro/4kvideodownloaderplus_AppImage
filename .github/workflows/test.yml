@@ -24,7 +24,7 @@ jobs:
 
       - name: Test downloads link for 4kdownload
         run: |
-          link="https://www.4kdownload.com/downloads"
+          link="https://www.4kdownload.com/downloadszz"
           status="$(curl -i $link)"
           echo -e "StatusCode for link $link:\n$status" >> $GITHUB_STEP_SUMMARY
           if grep -q "HTTP/2 404" <<< "$status"; then exit 1; fi
