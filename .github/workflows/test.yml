@@ -20,7 +20,7 @@ jobs:
 
       - name: Testing link 4K Video Downloader
         run: |
-          apt install links
+          sudo apt install links
 
           link="https://www.4kdownload.com/downloads"
 
