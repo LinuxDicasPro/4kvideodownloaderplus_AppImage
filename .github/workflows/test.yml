@@ -22,13 +22,21 @@ jobs:
         run: |
           sudo apt install links
 
-      - name: Test Link 4kdownload
+      - name: Test downloads link for 4kdownload
         run: |
-          export link="https://www.4kdownload.com/downloads"
+          link="https://www.4kdownload.com/downloadszzzz"
           status="$(curl -i $link)"
-          echo StatusCode for link $link: $status >> $GITHUB_STEP_SUMMARY
+          echo -e "StatusCode for link $link:\n$status" >> $GITHUB_STEP_SUMMARY
 
-      - name: Testing link 4K Video Downloader
+      - name: Search version for 4K Video Downloader
         run: |
+          link="https://www.4kdownload.com/downloads"
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
           printf "Search latest version: $version\n" >> $GITHUB_STEP_SUMMARY
+
+      - name: Test download link for 4K Video Downloader
+        run: |
+          link="https://www.4kdownload.com/downloads"
+          version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
+          link_prg="https://dl.4kdownload.com/app/4kvideodownloaderplus_${version}_amd64.tar.bz2"
+          
