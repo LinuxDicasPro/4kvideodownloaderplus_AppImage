@@ -23,7 +23,7 @@ jobs:
           link="https://www.4kdownload.com/downloads"
           
           for i in {1..35}; { printf '─' >> $GITHUB_STEP_SUMMARY; }; printf "\n" >> $GITHUB_STEP_SUMMARY
-          printf "Search latest version: "
+          printf "Search latest version: " >> $GITHUB_STEP_SUMMARY
 
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
 
