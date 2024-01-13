@@ -21,12 +21,12 @@ jobs:
       - name: Testing link 4K Video Downloader
         run: |
           link="https://www.4kdownload.com/downloads"
-          
-          for i in {1..35}; { printf '─' >> $GITHUB_STEP_SUMMARY; }; printf "\n" >> $GITHUB_STEP_SUMMARY
+
+          links --help
+
           printf "Search latest version: " >> $GITHUB_STEP_SUMMARY
 
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
 
           printf "\033[1;32m$version\033[m\n" >> $GITHUB_STEP_SUMMARY
           for i in {1..35}; { printf '─' >> $GITHUB_STEP_SUMMARY; }; printf "\n" >> $GITHUB_STEP_SUMMARY
-          
