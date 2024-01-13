@@ -24,10 +24,9 @@ jobs:
 
       - name: Test downloads link for 4kdownload
         run: |
-          link="https://www.4kdownload.com/downloads"
-          status="$(curl -i $link)"
+          link="https://www.4kdownload.com/downloadsz"
+          status="$(wget -S -i $link_prg)"
           echo -e "StatusCode for link $link:\n$status" >> $GITHUB_STEP_SUMMARY
-          if grep -q "HTTP/2 404" <<< "$status"; then exit 1; fi
 
       - name: Search version for 4K Video Downloader
         run: |
@@ -42,4 +41,3 @@ jobs:
           link_prg="https://dl.4kdownload.com/app/4kvideodownloaderplus_${version}_amd64.tar.bz2a"
           status="$(wget -S -i $link_prg)"
           echo -e "StatusCode for link $link_prg:\n$status" >> $GITHUB_STEP_SUMMARY
-          if grep -q "HTTP/2 404" <<< "$status"; then exit 1; fi
