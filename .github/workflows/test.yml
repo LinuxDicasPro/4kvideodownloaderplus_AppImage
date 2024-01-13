@@ -24,7 +24,7 @@ jobs:
 
       - name: Test Link 4kdownload
         run: |
-          link="https://www.4kdownload.com/downloads"
+          export link="https://www.4kdownload.com/downloads"
           status="$(curl -i $link)"
           echo StatusCode for link $link: $status >> $GITHUB_STEP_SUMMARY
 
