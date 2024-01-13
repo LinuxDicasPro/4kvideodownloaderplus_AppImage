@@ -27,5 +27,5 @@ jobs:
           link="https://www.4kdownload.com/downloads"
           printf "Search latest version: " >> $GITHUB_STEP_SUMMARY
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
-          printf "\033[1;32m$version\033[m\n" >> $GITHUB_STEP_SUMMARY
+          printf "$version\n" >> $GITHUB_STEP_SUMMARY
           test -z "$version" && { echo "update script. version not found!" >> $GITHUB_STEP_SUMMARY; exit 1; }
