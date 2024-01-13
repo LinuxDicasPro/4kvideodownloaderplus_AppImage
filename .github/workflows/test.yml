@@ -24,14 +24,14 @@ jobs:
 
       - name: Test downloads link for 4kdownload
         run: |
-          link="https://www.4kdownload.com/downloadszzzz"
+          link="https://www.4kdownload.com/downloads"
           status="$(curl -i $link)"
           echo -e "StatusCode for link $link:\n$status" >> $GITHUB_STEP_SUMMARY
           test grep -E "HTTP/2 404" <<< "$status" && exit 1
 
       - name: Search version for 4K Video Downloader
         run: |
-          link="https://www.4kdownload.com/downloads"
+          link="https://www.4kdownload.com/downloadszzz"
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
           printf "Search latest version: $version\n" >> $GITHUB_STEP_SUMMARY
 
