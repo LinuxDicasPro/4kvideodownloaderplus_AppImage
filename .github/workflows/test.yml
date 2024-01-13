@@ -27,6 +27,7 @@ jobs:
           link="https://www.4kdownload.com/downloadszzzz"
           status="$(curl -i $link)"
           echo -e "StatusCode for link $link:\n$status" >> $GITHUB_STEP_SUMMARY
+          test grep -E "HTTP/2 404" <<< "$status" && exit 1
 
       - name: Search version for 4K Video Downloader
         run: |
