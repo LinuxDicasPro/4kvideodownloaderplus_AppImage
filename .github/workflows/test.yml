@@ -22,7 +22,7 @@ jobs:
         run: sudo apt install links
 
       - name: Test downloads link for 4kdownload
-        run: wget -S "https://www.4kdownload.com/downloads"
+        run: wget --server-response --spider --quiet "https://www.4kdownload.com/downloads"
 
       - name: Search version for 4K Video Downloader
         run: |
@@ -34,10 +34,10 @@ jobs:
         run: |
           link="https://www.4kdownload.com/downloads"
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
-          wget -S https://dl.4kdownload.com/app/4kvideodownloaderplus_${version}_amd64.tar.bz2
+          wget --server-response --spider --quiet https://dl.4kdownload.com/app/4kvideodownloaderplus_${version}_amd64.tar.bz2
 
       - name: Check icon link
-        run: wget -S "https://static.4kdownload.com/main/img/redesign/videodownloader.a855bb9dddb2.svg"
+        run: wget --server-response --spider --quiet "https://static.4kdownload.com/main/img/redesign/videodownloader.a855bb9dddb2.svg"
 
       - name: Check appimagetool link
-        run: wget -S "https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage"
+        run: wget --server-response --spider --quiet "https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage"
