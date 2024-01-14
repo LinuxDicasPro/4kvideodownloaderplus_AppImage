@@ -23,7 +23,7 @@ jobs:
           sudo apt install links
 
       - name: Test downloads link for 4kdownload
-        run: wget -S "https://www.4kdownload.com/downloads"
+        run: wget -S "https://www.4kdownload.com/downloadss"
 
       - name: Search version for 4K Video Downloader
         run: |
