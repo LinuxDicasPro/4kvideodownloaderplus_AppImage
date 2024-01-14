@@ -23,11 +23,11 @@ jobs:
           sudo apt install links
 
       - name: Test downloads link for 4kdownload
-        run: wget -S "https://www.4kdownload.com/downloadss"
+        run: wget -S "https://www.4kdownload.com/downloads"
 
       - name: Search version for 4K Video Downloader
         run: |
-          link="https://www.4kdownload.com/downloads"
+          link="https://www.4kdownload.com/downloadss"
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
           printf "latest version: $version \n" >> $GITHUB_STEP_SUMMARY
 
