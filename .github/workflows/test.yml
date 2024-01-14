@@ -38,3 +38,6 @@ jobs:
 
       - name: Check icon link
         run: wget -S "https://static.4kdownload.com/main/img/redesign/videodownloader.a855bb9dddb2.svg"
+
+      - name: Check appimagetool link
+        run: wget -S "https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage"
