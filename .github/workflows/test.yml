@@ -24,7 +24,7 @@ jobs:
 
       - name: Test downloads link for 4kdownload
         run: |
-          link="https://www.4kdownload.com/downloadsz"
+          link="https://www.4kdownload.com/downloads"
           status="$(wget -S $link_prg)"
           echo -e "StatusCode for link $link:\n$status" >> $GITHUB_STEP_SUMMARY
 
