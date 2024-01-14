@@ -25,7 +25,8 @@ jobs:
       - name: Test downloads link for 4kdownload
         run: |
           link="https://www.4kdownload.com/downloads"
-          wget --server-response --spider "$link" >> $GITHUB_STEP_SUMMARY
+          status="$(wget -S $link)"
+          printf "StatusCode for link $link_prg:\n $status \n" >> $GITHUB_STEP_SUMMARY
 
       - name: Search version for 4K Video Downloader
         run: |
