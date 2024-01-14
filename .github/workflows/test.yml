@@ -26,7 +26,7 @@ jobs:
         run: |
           link="https://www.4kdownload.com/downloads"
           status="$(wget -S $link)"
-          printf "StatusCode for link $link_prg:\n $status \n" >> $GITHUB_STEP_SUMMARY
+          echo -e "StatusCode for link $link_prg: $status" >> $GITHUB_STEP_SUMMARY
 
       - name: Search version for 4K Video Downloader
         run: |
