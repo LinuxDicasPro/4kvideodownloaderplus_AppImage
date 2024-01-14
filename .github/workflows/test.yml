@@ -23,21 +23,16 @@ jobs:
           sudo apt install links
 
       - name: Test downloads link for 4kdownload
-        run: |
-          link="https://www.4kdownload.com/downloads"
-          status="$(wget -S $link)"
-          echo -e "StatusCode for link $link_prg: $status" >> $GITHUB_STEP_SUMMARY
+        run: wget -S "https://www.4kdownload.com/downloads"
 
       - name: Search version for 4K Video Downloader
         run: |
           link="https://www.4kdownload.com/downloads"
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
-          printf "Search latest version: $version \n" >> $GITHUB_STEP_SUMMARY
+          printf "latest version: $version \n" >> $GITHUB_STEP_SUMMARY
 
       - name: Test download link for 4K Video Downloader
         run: |
-          link="https://www.4kdownload.com/downloadss"
+          link="https://www.4kdownload.com/downloads"
           version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
-          link_prg="https://dl.4kdownload.com/app/4kvideodownloaderplus_${version}_amd64.tar.bz2"
-          status="$(wget --server-response --spider $link_prg)"
-          printf "StatusCode for link $link_prg:\n $status \n" >> $GITHUB_STEP_SUMMARY
+          wget -S https://dl.4kdownload.com/app/4kvideodownloaderplus_${version}_amd64.tar.bz2
