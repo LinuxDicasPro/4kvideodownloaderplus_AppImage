@@ -24,7 +24,7 @@ printf "Search latest version: "
 
 ########
 
-version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
+version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader Plus" <(links -dump "$link")))"
 
 ########
 
@@ -84,7 +84,7 @@ wget -c -q --show-progress -O "$prg.svg" "$link_svg"
 
 ####################################
 
-appimage_name="4k Video Downloader+"
+appimage_name="4k Video Downloader Plus"
 comment="Video Downloader"
 categories="Network;"
 
