@@ -27,13 +27,13 @@ jobs:
       - name: Search version for 4K Video Downloader
         run: |
           link="https://www.4kdownload.com/downloads"
-          version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
+          version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader Plus" <(links -dump "$link")))"
           printf "latest version: $version \n" >> $GITHUB_STEP_SUMMARY
 
       - name: Test download link for 4K Video Downloader
         run: |
           link="https://www.4kdownload.com/downloads"
-          version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader+" <(links -dump "$link")))"
+          version="$(grep -Eom1 "([0-9]+[.]){2}[0-9]+" <(grep -A5 "    4K Video Downloader Plus" <(links -dump "$link")))"
           wget --server-response --spider --quiet https://dl.4kdownload.com/app/4kvideodownloaderplus_${version}_amd64.tar.bz2
 
       - name: Check icon link
